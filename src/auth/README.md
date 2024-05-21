@@ -1,0 +1,8 @@
+- GoogleGuard will be used for google auth
+- FacebookGuard will be used for google auth
+- JWTGuard will be used for everyother endpoint for authorization
+    - receives access token
+- RefreshTokenGuard will be used for refresh token method
+    - receives refresh token
+- LocalGuard will be used for email/username auth
+    - receives either username/email and password

@@ -1,0 +1,28 @@
+POST http://localhost:3000/api/auth/local/login HTTP/1.1
+content-type: application/json
+
+{
+    "identifier": "harrison",
+    "password": "billion-dollar-project"
+}
+###
+
+POST http://localhost:3000/api/auth/local/register HTTP/1.1
+content-type: application/json
+
+{
+    "firstName": "Harrison",
+    "userName": "harrison",
+    "email": "harry@yahoo.com",
+    "password": "billion-dollar-project"
+}
+###
+
+GET http://localhost:3000/api/users/23822768-4b83-4f4a-9a4b-5c4c8e3a1e22 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJoYXJyeUB5YWhvby5jb20iLCJpYXQiOjE3MTYxNTMzMjcsImV4cCI6MTcxNjE1MzM4N30.yT9jRUMQZ9-2Rh8lKna50TMARxsCTuhcTz_38kJGTxo
+
+# {
+#     "identifier": "harry@yahoo.com",
+#     "password": "billion-dollar-project"
+# }
