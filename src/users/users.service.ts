@@ -1,52 +1,42 @@
 import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/sequelize';
-import { User } from './models/user.model';
-import { isValidEmail, isValidUUID } from '../common/utils';
+import { PrismaService } from '../prisma.service';
+import { User, Prisma } from '@prisma/client';
 import { signUpDto } from 'src/auth/auth.dto';
 
 @Injectable()
 export class UsersService {
-	constructor(
-		@InjectModel(User)
-		private userModel: typeof User
-	) {}
+  constructor(private readonly prismaService: PrismaService) {}
 
-	async findUser(identifier: string): Promise<User | null> {
-		if (!identifier) {
-			return null;
-		}
+  async findUser(
+    identifier: Prisma.UserWhereUniqueInput
+  ): Promise<User | null> {
+    return await this.prismaService.user.findUnique({
+      where: identifier
+    });
+  }
 
-		let key = 'username';
-		if (isValidUUID(identifier)) {
-			key = 'id';
-		} else if (isValidEmail(identifier.toString())) {
-			key = 'email';
-		}
-		return this.userModel.findOne({ where: { [key]: identifier } });
-	}
+  async findUsers(): Promise<User[]> {
+    return this.prismaService.user.findMany();
+  }
 
-	async findUsers(): Promise<User[]> {
-		return this.userModel.findAll();
-	}
+  async createUser(data: signUpDto): Promise<User> {
+    return this.prismaService.user.create({ data });
+  }
 
-	async createUser(data: signUpDto): Promise<User> {
-		return this.userModel.create({
-			...data
-		});
-	}
+  async updateUser(data, id: string): Promise<User> {
+    if ('password' in data) {
+      delete data.password;
+    }
+    const user = await this.prismaService.user.update({
+      where: { id },
+      data
+    });
+    return user;
+  }
 
-	async updateUser(data, userObj?: User, id?: string): Promise<User> {
-		const user = userObj ? userObj : await this.findUser(id);
-		if ('password' in data) {
-			delete data.password;
-		}
-		user.set(data);
-		await user.save();
-		return user;
-	}
-
-	async deleteUser(id: string): Promise<void> {
-		const user = await this.findUser(id);
-		await user.destroy();
-	}
+  async deleteUser(id: string): Promise<void> {
+    await this.prismaService.user.delete({
+      where: { id }
+    });
+  }
 }

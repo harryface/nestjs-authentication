@@ -4,16 +4,16 @@ import { hash, compare } from 'bcrypt';
 
 @Injectable()
 export class PasswordService {
-	constructor(private configService: ConfigService) {}
+  constructor(private configService: ConfigService) {}
 
-	validatePassword(password: string, hashedPassword: string): Promise<boolean> {
-		return compare(password, hashedPassword);
-	}
+  validatePassword(password: string, hashedPassword: string): Promise<boolean> {
+    return compare(password, hashedPassword);
+  }
 
-	async hashPassword(password: string): Promise<string> {
-		return await hash(
-			password,
-			Number(this.configService.get('bcryptSaltOrRound'))
-		);
-	}
+  async hashPassword(password: string): Promise<string> {
+    return await hash(
+      password,
+      Number(this.configService.get('bcryptSaltOrRound'))
+    );
+  }
 }

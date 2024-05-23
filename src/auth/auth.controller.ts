@@ -7,25 +7,25 @@ import { signInDto, signUpDto } from './auth.dto';
 
 @Controller('auth')
 export class AuthController
-	extends GoogleController
-	implements FacebookController
+  extends GoogleController
+  implements FacebookController
 {
-	constructor(private authService: AuthService) {
-		super();
-	}
+  constructor(private authService: AuthService) {
+    super();
+  }
 
-	@isPublic()
-	@Post('local/login')
-	async login(@Body() body: signInDto) {
-		return this.authService.login({
-			identifier: body.identifier,
-			password: body.password
-		});
-	}
+  @isPublic()
+  @Post('local/login')
+  async login(@Body() body: signInDto) {
+    return this.authService.login({
+      identifier: body.identifier,
+      password: body.password
+    });
+  }
 
-	@isPublic()
-	@Post('local/register')
-	async register(@Body() body: signUpDto) {
-		return this.authService.registerUser(body);
-	}
+  @isPublic()
+  @Post('local/register')
+  async register(@Body() body: signUpDto) {
+    return this.authService.registerUser(body);
+  }
 }

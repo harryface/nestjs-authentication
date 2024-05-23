@@ -1,14 +1,4 @@
-import { Controller, Request, Get, UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from './auth/providers/local/local.quard';
-import { AuthService } from './auth/services/auth.service';
+import { Controller } from '@nestjs/common';
 
 @Controller()
-export class AppController {
-  constructor(private authService: AuthService) {}
-
-  @UseGuards(JwtAuthGuard)
-  @Get('profile')
-  getProfile(@Request() req) {
-    return req.user;
-  }
-}
+export class AppController {}
