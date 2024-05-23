@@ -1,11 +1,16 @@
 ## Description
-NestJS Authentication Starter
-Email/Username Password Authentication
-Facebook Authentication
-Google Authentication
-JWT Authentication
+* NestJS Authentication Boilerplate
+This repository contains a NestJS application with various authentication strategies implemented:
+- Local authentication using email/username and password
+- Google authentication using OAuth
+- Facebook authentication using OAuth
+The application is built using NestJS and features multiple branches with different ORM solutions:
+- Prisma (branch: master)
+- TypeORM (branch: auth_orm_typeorm)
+- Sequelize (branch: auth_orm_sequelize)
+This boilerplate provides a starting point for building robust and scalable authentication systems with NestJS. You can explore different ORM solutions by switching between branches.
 
-Sequelize Database
+Note: You may need to configure environment variables and OAuth credentials to use the authentication strategies.
 
 ## Installation
 
