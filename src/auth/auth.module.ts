@@ -13,29 +13,29 @@ import { PasswordService } from './services/password.service';
 import { JwtModule } from '@nestjs/jwt';
 
 @Module({
-	imports: [
-		UsersModule,
-		PassportModule,
-		JwtModule.registerAsync({
-			useFactory: async (configService: ConfigService) => ({
-				secret: configService.get('JWT_SECRET'),
-				signOptions: { expiresIn: configService.get('JWT_EXPIRES_IN') }
-			}),
-			inject: [ConfigService]
-		})
-	],
-	providers: [
-		AuthService,
-		AnonymousStrategy,
-		GoogleStrategy,
-		JwtStrategy,
-		PasswordService,
-		{
-			provide: APP_GUARD,
-			useClass: JwtAuthGuard
-		}
-	],
-	exports: [AuthService],
-	controllers: [AuthController]
+  imports: [
+    UsersModule,
+    PassportModule,
+    JwtModule.registerAsync({
+      useFactory: async (configService: ConfigService) => ({
+        secret: configService.get('JWT_SECRET'),
+        signOptions: { expiresIn: configService.get('JWT_EXPIRES_IN') }
+      }),
+      inject: [ConfigService]
+    })
+  ],
+  providers: [
+    AuthService,
+    AnonymousStrategy,
+    GoogleStrategy,
+    JwtStrategy,
+    PasswordService,
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard
+    }
+  ],
+  exports: [AuthService],
+  controllers: [AuthController]
 })
-export class AuthModule {}
+export class AuthModule { }

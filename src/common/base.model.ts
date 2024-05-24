@@ -1,16 +1,17 @@
 import {
-	Column,
-	Default,
-	Model,
-	PrimaryKey,
-	DataType
-} from 'sequelize-typescript';
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn
+} from 'typeorm';
 
-// https://sequelize.org/api/v6/identifiers.html
-// https://www.npmjs.com/package/sequelize-typescript
-export class BaseModel extends Model {
-	@PrimaryKey
-	@Default(DataType.UUIDV4)
-	@Column(DataType.UUID)
-	id: any;
+// https://typeorm.io/entities#column-types
+export abstract class BaseEntity {
+  @PrimaryGeneratedColumn('uuid')
+  id: any;
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
 }
