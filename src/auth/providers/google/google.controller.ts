@@ -5,15 +5,15 @@ import { GoogleAuthGuard } from './google.guard';
 // https://stackoverflow.com/questions/68646334/nest-js-google-loginpassport-js-with-spa-frontendreact
 
 export class GoogleController {
-	@Get('google/login')
-	@UseGuards(GoogleAuthGuard)
-	handleLogin() {
-		return;
-	}
+  @Get('google/login')
+  @UseGuards(GoogleAuthGuard)
+  handleLogin() {
+    return;
+  }
 
-	@Get('google/redirect')
-	@UseGuards(GoogleAuthGuard)
-	handleRedirect() {
-		return;
-	}
+  @Get('google/redirect')
+  @UseGuards(GoogleAuthGuard)
+  handleRedirect() {
+    return;
+  }
 }

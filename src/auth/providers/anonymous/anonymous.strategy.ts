@@ -6,7 +6,7 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AnonymousStrategy extends PassportStrategy(Strategy) {
-	constructor() {
-		super();
-	}
+  constructor() {
+    super();
+  }
 }
