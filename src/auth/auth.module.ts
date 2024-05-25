@@ -11,10 +11,12 @@ import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './providers/local/local.quard';
 import { PasswordService } from './services/password.service';
 import { JwtModule } from '@nestjs/jwt';
+import { HelperModule } from 'src/helper/helper.module';
 
 @Module({
   imports: [
     UsersModule,
+    HelperModule,
     PassportModule,
     JwtModule.registerAsync({
       useFactory: async (configService: ConfigService) => ({

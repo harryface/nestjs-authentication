@@ -1,9 +1,9 @@
-export class signInDto {
+export class SignInDto {
   identifier: string;
   password: string;
 }
 
-export class signUpDto {
+export class SignUpDto {
   email: string;
   userName: string;
   firstName?: string;

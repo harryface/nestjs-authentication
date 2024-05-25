@@ -1,0 +1,21 @@
+version: '3.9'
+services:
+  redis:
+    image: redis:5
+    ports:
+      - 6379:6379
+
+  postgres:
+    image: postgres:11
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+  # https://s3ninja.net/
+  s3-emulator:
+    image: scireum/s3-ninja:latest
+    ports:
+      - 9444:9000

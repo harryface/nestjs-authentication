@@ -20,6 +20,9 @@ $ npm install
 
 ## Running the app
 
+- Docker
+docker-compose up -d postgres s3-emulator
+
 ```bash
 # development
 $ npm run start

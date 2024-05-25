@@ -1,3 +1,4 @@
+import { UtilsService } from './../../helper/utils.service';
 import {
   BadRequestException,
   ConflictException,
@@ -8,9 +9,8 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { UsersService } from '../../users/users.service';
-import { ChangePasswordDto, signInDto, signUpDto } from '../auth.dto';
+import { ChangePasswordDto, SignInDto, SignUpDto } from '../auth.dto';
 import { PasswordService } from './password.service';
-import { isValidEmail, isValidUUID } from '../../common/utils';
 import { Prisma } from '@prisma/client';
 
 export class Token {
@@ -24,10 +24,11 @@ export class AuthService {
     private usersService: UsersService,
     private jwtService: JwtService,
     private passwordService: PasswordService,
-    private configService: ConfigService
+    private configService: ConfigService,
+    private utilsService: UtilsService
   ) {}
 
-  async registerUser(payload: signUpDto): Promise<Token> {
+  async registerUser(payload: SignUpDto): Promise<Token> {
     let hashedPassword = null;
     if ('password' in payload) {
       hashedPassword = await this.passwordService.hashPassword(
@@ -98,11 +99,13 @@ export class AuthService {
     return null;
   }
 
-  async login(login_data: signInDto): Promise<Token> {
+  async login(login_data: SignInDto): Promise<Token> {
     let query;
-    if (isValidUUID(login_data.identifier)) {
+    if (this.utilsService.isValidUUID(login_data.identifier)) {
       query = { id: login_data.identifier };
-    } else if (isValidEmail(login_data.identifier.toString())) {
+    } else if (
+      this.utilsService.isValidEmail(login_data.identifier.toString())
+    ) {
       query = { email: login_data.identifier };
     } else {
       query = { userName: login_data.identifier };

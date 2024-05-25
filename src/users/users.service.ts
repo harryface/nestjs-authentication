@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
 import { User, Prisma } from '@prisma/client';
-import { signUpDto } from 'src/auth/auth.dto';
+import { SignUpDto } from 'src/auth/auth.dto';
 
 @Injectable()
 export class UsersService {
@@ -19,7 +19,7 @@ export class UsersService {
     return this.prismaService.user.findMany();
   }
 
-  async createUser(data: signUpDto): Promise<User> {
+  async createUser(data: SignUpDto): Promise<User> {
     return this.prismaService.user.create({ data });
   }
 
